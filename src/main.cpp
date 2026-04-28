@@ -244,7 +244,7 @@ void loop()
           screen.clear();
           
             break;
-
+          //add cues and lights
         default:
             screen.clear();
             screen.setCursor(0, 0);
