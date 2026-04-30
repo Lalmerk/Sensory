@@ -175,7 +175,7 @@ void loop()
   if (isnan(tempC) || isnan(humidity)) 
   {
     Serial.println("Failed to read from DHT sensor!");
-    
+    // might need to  change this to screen^^^
     screen.clear();
     screen.setCursor(0,0);
     screen.print("DHT Sensor FAIL");
@@ -206,6 +206,11 @@ void loop()
           screen.clear();
           screen.setCursor(0, 0);
           screen.print("Status: Normal  ");
+          screen.setCursor(0,1);
+          screen.print("Temp: ");
+          screen.print(tempC);
+          screen.print(char(223)); 
+          screen.print("C");
           delay(1000);
           screen.clear();
           break;
@@ -215,6 +220,11 @@ void loop()
           screen.clear();
           screen.setCursor(0, 0);
           screen.print("Status: Caution ");
+          screen.setCursor(0,1);
+          screen.print("Temp: ");
+          screen.print(tempC);
+          screen.print(char(223)); 
+          screen.print("C");
           delay(1000);
 
           tone(buzzer, NOTE_B4, 150);
@@ -237,6 +247,11 @@ void loop()
           // 33-41 
           screen.setCursor(0, 0);
           screen.print("EXTREME CAUTION ");
+          screen.setCursor(0,1);
+          screen.print("Temp: ");
+          screen.print(tempC);
+          screen.print(char(223)); 
+          screen.print("C");
           delay(1000);
 
           tone(buzzer, NOTE_B5, 150);
@@ -258,6 +273,11 @@ void loop()
           // 42-51  Danger
           screen.setCursor(0, 0);
           screen.print("STATUS: DANGER! ");
+          screen.setCursor(0,1);
+          screen.print("Temp: ");
+          screen.print(tempC);
+          screen.print(char(223)); 
+          screen.print("C");
           delay(1000);
           
           tone(buzzer, NOTE_B6, 150);
@@ -280,6 +300,11 @@ void loop()
             // 52+ 
             screen.setCursor(0, 0);
             screen.print("EXTREME DANGER!!");
+            screen.setCursor(0,1);
+            screen.print("Temp: ");
+            screen.print(tempC);
+            screen.print(char(223)); 
+            screen.print("C");
             delay(1000);
 
             tone(buzzer, NOTE_B6, 80);
@@ -315,11 +340,11 @@ void loop()
     screen.print("Temp below avg. Current Temp: ");
     screen.println(tempC);
     screen.setCursor(0,1);
-    screen.print("Air Temp: ");
+    screen.print("Temp: ");
     screen.print(tempC);
-    delay(2000);
     screen.print(char(223)); 
     screen.print("C");
+    delay(2000);
     screen.clear();
     // delay(200); 
     digitalWrite(blue_LED, HIGH);
