@@ -175,14 +175,14 @@ void loop()
   if (isnan(tempC) || isnan(humidity)) 
   {
     Serial.println("Failed to read from DHT sensor!");
-    
+    // might need to  change this to screen^^^
     screen.clear();
     screen.setCursor(0,0);
     screen.print("DHT Sensor FAIL");
 
     digitalWrite(red_LED, HIGH);
     tone(buzzer, NOTE_A4);
-    delay(5000);
+    delay(2000);
 
     noTone(buzzer);
     digitalWrite(red_LED, LOW);
@@ -192,7 +192,7 @@ void loop()
     return; // Skip the rest of the loop if there's an error
   }
 
-  if (tempF >= 80.0) 
+  if (tempC >= 27.0) 
   {
    
     HI = SteadmanFormula(tempF, humidity);
@@ -206,7 +206,12 @@ void loop()
           screen.clear();
           screen.setCursor(0, 0);
           screen.print("Status: Normal  ");
-          delay(5000);
+          screen.setCursor(0,1);
+          screen.print("Temp: ");
+          screen.print(tempC);
+          screen.print(char(223)); 
+          screen.print("C");
+          delay(1000);
           screen.clear();
           break;
 
@@ -215,16 +220,52 @@ void loop()
           screen.clear();
           screen.setCursor(0, 0);
           screen.print("Status: Caution ");
-          delay(5000);
-          screen.clear();
+          screen.setCursor(0,1);
+          screen.print("Temp: ");
+          screen.print(tempC);
+          screen.print(char(223)); 
+          screen.print("C");
+          delay(1000);
 
+          tone(buzzer, NOTE_B4, 150);
+          delay(buzzer);
+          tone(buzzer, NOTE_B4, 150);
+
+          delay(500);
+
+          tone(buzzer, NOTE_B4, 150);
+          delay(buzzer);
+          tone(buzzer, NOTE_B4, 150); 
+          delay(500);
+          noTone(buzzer);     
+          delay(500);
+
+          screen.clear();
           break;
         
         case 2:
           // 33-41 
           screen.setCursor(0, 0);
           screen.print("EXTREME CAUTION ");
-          delay(5000);
+          screen.setCursor(0,1);
+          screen.print("Temp: ");
+          screen.print(tempC);
+          screen.print(char(223)); 
+          screen.print("C");
+          delay(1000);
+
+          tone(buzzer, NOTE_B5, 150);
+          delay(buzzer);
+          tone(buzzer, NOTE_B5, 150);
+
+          delay(500);
+
+          tone(buzzer, NOTE_B5, 150);
+          delay(buzzer);
+          tone(buzzer, NOTE_B5, 150); 
+          delay(500);
+          noTone(buzzer);     
+          delay(500);
           screen.clear();
           break;
 
@@ -232,7 +273,26 @@ void loop()
           // 42-51  Danger
           screen.setCursor(0, 0);
           screen.print("STATUS: DANGER! ");
-          delay(5000);
+          screen.setCursor(0,1);
+          screen.print("Temp: ");
+          screen.print(tempC);
+          screen.print(char(223)); 
+          screen.print("C");
+          delay(1000);
+          
+          tone(buzzer, NOTE_B6, 150);
+          delay(buzzer);
+          tone(buzzer, NOTE_B6, 150);
+
+          delay(500);
+
+          tone(buzzer, NOTE_B6, 150);
+          delay(buzzer);
+          tone(buzzer, NOTE_B6, 150); 
+          delay(500);
+          noTone(buzzer);     
+          delay(500);
+
           screen.clear();
           break;
 
@@ -240,16 +300,34 @@ void loop()
             // 52+ 
             screen.setCursor(0, 0);
             screen.print("EXTREME DANGER!!");
-            delay(5000);
-          screen.clear();
-          
+            screen.setCursor(0,1);
+            screen.print("Temp: ");
+            screen.print(tempC);
+            screen.print(char(223)); 
+            screen.print("C");
+            delay(1000);
+
+            tone(buzzer, NOTE_B6, 80);
+            delay(buzzer);  
+            tone(buzzer, NOTE_B6, 80);
+
+            delay(160 );
+
+            tone(buzzer, NOTE_B6, 80);
+            delay(buzzer);
+            tone(buzzer, NOTE_B6, 80); 
+            delay(500);
+            noTone(buzzer);     
+            delay(500);
+            screen.clear();
             break;
+
           //add cues and lights
         default:
             screen.clear();
             screen.setCursor(0, 0);
             screen.print("Check Sensor... ");
-            delay(5000);
+            delay(2000);
             screen.clear();
             break;
     }
@@ -258,22 +336,25 @@ void loop()
   } 
   else 
   {
-      
-    Serial.print("Temperature is below threshold. Current Temp: ");
-    Serial.println(tempC);
-
-    screen.clear();
     screen.setCursor(0,0);
-    screen.print("Air Temp: ");
+    screen.print("Temp below avg. Current Temp: ");
+    screen.println(tempC);
+    screen.setCursor(0,1);
+    screen.print("Temp: ");
     screen.print(tempC);
     screen.print(char(223)); 
     screen.print("C");
-
+    delay(2000);
+    screen.clear();
+    // delay(200); 
     digitalWrite(blue_LED, HIGH);
-    delay(5000);
+    delay(200);     
     screen.clear();
     digitalWrite(blue_LED, LOW);
+    delay(200); 
+
   }
+  
 
  
 
