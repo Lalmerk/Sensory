@@ -94,3 +94,77 @@
 #define NOTE_CS8 4435
 #define NOTE_D8  4699
 #define NOTE_DS8 4978
+
+
+void playMegalovania(int buzzer) 
+{
+  
+  int noteDuration = 120;
+  int pauseBetweenNotes = noteDuration * 0.30;
+
+  int bassNotes[] = {NOTE_D4, NOTE_C4, NOTE_B3, NOTE_AS3};
+
+  for (int riff = 0; riff < 4; riff++) 
+  {
+   
+    for (int i = 0; i < 2; i++) 
+    {
+      tone(buzzer, bassNotes[riff], noteDuration);
+      delay(noteDuration + pauseBetweenNotes);
+    }
+
+    // The high melody remains the same
+    int melody[] = {NOTE_D5, NOTE_A4, NOTE_GS4, NOTE_G4, NOTE_F4, NOTE_D4, NOTE_F4, NOTE_G4};
+    int melodyDurations[] = {noteDuration * 2, noteDuration * 3, noteDuration * 2, noteDuration * 2, noteDuration * 2, noteDuration, noteDuration, noteDuration};
+
+    for (int i = 0; i < 8; i++) 
+    {
+      tone(buzzer, melody[i], melodyDurations[i]);
+      delay(melodyDurations[i] + pauseBetweenNotes);
+    }
+  }
+  noTone(buzzer);
+}
+
+
+// Pass 'buzzer' (your #define) into the 'pin' parameter
+void playAnotherMedium(int pin) 
+{
+  
+  int noteDuration = 140; 
+  int pauseBetweenNotes = noteDuration * 0.2;
+
+ 
+  int melody[] = {
+    NOTE_DS4, NOTE_AS4, NOTE_GS4, 0,        
+    NOTE_DS4, NOTE_AS4, NOTE_GS4, 0, 
+    NOTE_F4,  NOTE_C5,  NOTE_AS4, 0,        
+    NOTE_DS4, NOTE_AS4, NOTE_GS4, 0,
+    
+  
+    NOTE_G4,  NOTE_GS4, NOTE_AS4, NOTE_C5, 
+    NOTE_DS5, NOTE_D5,  NOTE_AS4, NOTE_GS4
+  };
+
+  int durations[] = {
+    noteDuration, noteDuration, noteDuration * 2, noteDuration,
+    noteDuration, noteDuration, noteDuration * 2, noteDuration,
+    noteDuration, noteDuration, noteDuration * 2, noteDuration,
+    noteDuration, noteDuration, noteDuration * 2, noteDuration,
+
+    noteDuration, noteDuration, noteDuration, noteDuration,
+    noteDuration, noteDuration, noteDuration, noteDuration * 2
+  };
+
+  for (int i = 0; i < 24; i++) {
+    if (melody[i] == 0) {
+      delay(durations[i]); // Rest
+    } else 
+    {
+      
+      tone(pin, melody[i], durations[i]);
+      delay(durations[i] + pauseBetweenNotes);
+    }
+  }
+  noTone(pin);
+}
