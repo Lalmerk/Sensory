@@ -19,11 +19,13 @@
 DHT sensor(DHTPIN, DHTTYPE); //DHT object
 LiquidCrystal_I2C screen(0x27, 16, 2);
 
+
 void setup() 
 {
   
   int POST_Status;
-
+  randomSeed(analogRead(0)); 
+  int randomnum;
   pinMode(red_LED, OUTPUT);  
   pinMode(blue_LED, OUTPUT); 
   pinMode(green_LED, OUTPUT); 
@@ -41,8 +43,22 @@ void setup()
       screen.clear();
       screen.setCursor(0,0);
       screen.print("Welcome!");
-
-      playMegalovania(buzzer);
+      //delete line 44 to 54
+      randomnum = random(0, 4);
+      
+      if (randomnum == 0)
+      {
+        Serial.print(randomnum);
+        playAnotherMedium(buzzer);
+        
+      }
+      else if(randomnum == 1)
+      {
+         Serial.print(randomnum);
+        playMegalovania(buzzer);
+      }
+       Serial.print(randomnum);
+      
 
       digitalWrite(green_LED, HIGH);
 
@@ -73,12 +89,12 @@ void setup()
           digitalWrite(red_LED, HIGH);
           tone(buzzer, NOTE_A4);
 
-          delay(500);
+          delay(100);
 
           
           digitalWrite(red_LED, LOW);
           noTone(buzzer);     
-          delay(500);
+          delay(1000);
         }
         while (1) //traps the program to debug state until user restarts or turn off the device
         {
@@ -99,19 +115,19 @@ void setup()
           digitalWrite(blue_LED, HIGH);
           tone(buzzer, NOTE_B0);
 
-          delay(500);
+          delay(1000);
 
           
           digitalWrite(blue_LED, LOW);
           noTone(buzzer);     
-          delay(500);
+          delay(1000);
         }
         while (1) //traps the program to debug state until user restarts or turn off the device
         {
           digitalWrite(blue_LED, HIGH);
-          delay(500);
+          delay(1000);
           digitalWrite(blue_LED, LOW);
-          delay(500);
+          delay(1000);
         }
 
       break;

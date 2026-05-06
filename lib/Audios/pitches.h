@@ -113,7 +113,6 @@ void playMegalovania(int buzzer)
       delay(noteDuration + pauseBetweenNotes);
     }
 
-    // The high melody remains the same
     int melody[] = {NOTE_D5, NOTE_A4, NOTE_GS4, NOTE_G4, NOTE_F4, NOTE_D4, NOTE_F4, NOTE_G4};
     int melodyDurations[] = {noteDuration * 2, noteDuration * 3, noteDuration * 2, noteDuration * 2, noteDuration * 2, noteDuration, noteDuration, noteDuration};
 
@@ -127,7 +126,7 @@ void playMegalovania(int buzzer)
 }
 
 
-// Pass 'buzzer' (your #define) into the 'pin' parameter
+
 void playAnotherMedium(int pin) 
 {
   
@@ -135,7 +134,8 @@ void playAnotherMedium(int pin)
   int pauseBetweenNotes = noteDuration * 0.2;
 
  
-  int melody[] = {
+  int melody[] = 
+  {
     NOTE_DS4, NOTE_AS4, NOTE_GS4, 0,        
     NOTE_DS4, NOTE_AS4, NOTE_GS4, 0, 
     NOTE_F4,  NOTE_C5,  NOTE_AS4, 0,        
@@ -146,7 +146,8 @@ void playAnotherMedium(int pin)
     NOTE_DS5, NOTE_D5,  NOTE_AS4, NOTE_GS4
   };
 
-  int durations[] = {
+  int durations[] = 
+  {
     noteDuration, noteDuration, noteDuration * 2, noteDuration,
     noteDuration, noteDuration, noteDuration * 2, noteDuration,
     noteDuration, noteDuration, noteDuration * 2, noteDuration,
@@ -168,3 +169,4 @@ void playAnotherMedium(int pin)
   }
   noTone(pin);
 }
+
